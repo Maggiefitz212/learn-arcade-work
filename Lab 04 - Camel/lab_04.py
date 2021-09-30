@@ -40,20 +40,13 @@ def main():
             print("Feet traveled: " + str(feet_traveled))
             print("Drinks in canteen: " + str(drinks_left))
             print("The kid is " + str(distance_behind_you) + " feet behind you.")
-<<<<<<< HEAD
         elif user_input.upper == "D":
             # User rested so tiredness is 0
             # Kid moves 7 - 14 feet closer
-=======
-        elif user_input.upper() == "D":
->>>>>>> e9b4c1cd4b2f96cbf5e5167e9d4b94aa656db886
             your_tiredness = 0
             print("You are rested and ready to be a bully again.")
             kid_feet_traveled_in_round = random.randrange(7, 15)
             kid_feet_traveled = kid_feet_traveled + kid_feet_traveled_in_round
-            distance_behind_you = feet_traveled - kid_feet_traveled
-            if distance_behind_you > 0:
-                print("The kid is " + str(distance_behind_you) + " feet behind you.")
         elif user_input.upper() == "C":
             # Move ahead 10 - 20 feet at full speed
             # User gets a little more thirsty
@@ -67,7 +60,6 @@ def main():
             your_tiredness = your_tiredness + random.randrange(1, 4)
             kid_feet_traveled_in_round = random.randrange(7, 15)
             kid_feet_traveled = kid_feet_traveled + kid_feet_traveled_in_round
-<<<<<<< HEAD
             water_fountain_chance = random.randrange(1, 21)
             if water_fountain_chance == 1 and not done:
                 print("You have found a water fountain. Your water bottle is filled again!")
@@ -75,17 +67,6 @@ def main():
                 your_tiredness = 0
                 drinks_left = 3
 
-=======
-            distance_behind_you = feet_traveled - kid_feet_traveled
-            if distance_behind_you > 0:
-                print("The kid is " + str(distance_behind_you) + " feet behind you.")
-            water_fountain_chance = random.randrange(20)
-            if water_fountain_chance == 1:
-                print("You have found a water fountain. You refilled your water bottle.")
-                your_tiredness = 0
-                drinks_left = 3
-                thirst = 0
->>>>>>> e9b4c1cd4b2f96cbf5e5167e9d4b94aa656db886
         elif user_input.upper() == "B":
             # Move ahead 5 - 12 feet at moderate speed
             # User has a 1 in 20 chance of finding a water fountain
@@ -94,41 +75,19 @@ def main():
             feet_traveled = feet_traveled + feet_traveled_in_round
             print("You have traveled " + str(feet_traveled_in_round) + " in this round.")
             print("You have traveled " + str(feet_traveled) + " in total.")
-<<<<<<< HEAD
             water_fountain_chance = random.randrange(1, 21)
             if water_fountain_chance == 1 and not done:
                 print("You have found a water fountain. Your water bottle is filled again!")
                 thirst = 0
                 your_tiredness = 0
                 drinks_left = 3
-=======
-            kid_feet_traveled_in_round = random.randrange(7, 15)
-            kid_feet_traveled = kid_feet_traveled + kid_feet_traveled_in_round
-            distance_behind_you = feet_traveled - kid_feet_traveled
-            if distance_behind_you > 0:
-                print("The kid is " + str(distance_behind_you) + " feet behind you.")
-            water_fountain_chance = random.randrange(20)
-            if water_fountain_chance == 1:
-                print("You have found a water fountain. You refilled your water bottle.")
-                your_tiredness = 0
-                drinks_left = 3
-                thirst = 0
->>>>>>> e9b4c1cd4b2f96cbf5e5167e9d4b94aa656db886
         elif user_input.upper() == "A":
             # User takes a drink out of their water bottle
             # Their thirst is set to 0
             if drinks_left != 0:
                 print("How refreshing! You aren't thirsty anymore!")
                 thirst = 0
-                print("That's refreshing! You aren't thirsty anymore.")
-            else:
-                print("You are out of water!")
-                print("You passed out from dehydration.")
-            kid_feet_traveled_in_round = random.randrange(7, 15)
-            kid_feet_traveled = kid_feet_traveled + kid_feet_traveled_in_round
-            distance_behind_you = feet_traveled - kid_feet_traveled
-            if distance_behind_you > 0:
-                print("The kid is " + str(distance_behind_you) + " feet behind you.")
+
         if thirst > 6:
             # If statement checks to see if user passed out from dehydration and loses game
             print("You passed out from dehydration.")
@@ -141,7 +100,6 @@ def main():
         if your_tiredness > 8:
             # If statement checks to see if user passed out from exhaustion
             print("You passed out from exhaustion.")
-            done = True
         elif your_tiredness > 5:
             # If statement checks to see if user is getting close to passing out from exhaustion
             # If true, it tells user that they are thirsty
