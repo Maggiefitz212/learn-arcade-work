@@ -33,6 +33,7 @@ def main():
         elif user_input.upper() == "E":
             print("Feet traveled: " + str(feet_traveled))
             print("Drinks in canteen: " + str(drinks_left))
+            distance_behind_you = feet_traveled - kid_feet_traveled
             print("The kid is " + str(distance_behind_you) + " feet behind you.")
         elif user_input.upper() == "D":
             your_tiredness = 0
@@ -94,21 +95,24 @@ def main():
         elif thirst > 4:
             print("You are thirsty.")
 
-        if your_tiredness > 8:
-            print("You passed out from exhaustion.")
-            done = True
-        elif your_tiredness > 5:
-            print("You are getting tired.")
+        if not done:
+            if your_tiredness > 8:
+                print("You passed out from exhaustion.")
+                done = True
+            elif your_tiredness > 5:
+                print("You are getting tired.")
 
-        if distance_behind_you <= 0:
-            print("The kid caught you and took back his lunch money!")
-            print("Not going to lie, I hoped this would happen. Thieves should be held accountable.")
-            done = True
-        elif distance_behind_you < 15:
-            print("The kid's catching up!")
+        if not done:
+            if distance_behind_you <= 0:
+                print("The kid caught you and took back his lunch money!")
+                print("Not going to lie, I hoped this would happen. Thieves should be held accountable.")
+                done = True
+            elif distance_behind_you < 15:
+                print("The kid's catching up!")
 
-        if feet_traveled >= 200 and your_tiredness <= 8:
-            print("You won! I feel bad for the kid though. You should give his money back.")
+        if not done:
+            if feet_traveled >= 200 and your_tiredness <= 8:
+                print("You won! I feel bad for the kid though. You should give his money back.")
 
 
 main()
