@@ -37,8 +37,9 @@ def main():
     while not done:
         print("")
         print(current_room.description)
-        user_choice = input("What do you want to do?")
+        user_choice = input("Where do you want to go?")
         print(user_choice)
+        print("")
         if user_choice.lower == "north" or user_choice.lower == "n" or user_choice.lower == "head north":
             next_room = room_list[current_room].north
 
