@@ -56,6 +56,7 @@ def draw_fence(x, y):
     arcade.draw_line(x + 30, y + 25, x + 30, y - 100, arcade.csscolor.BLANCHED_ALMOND, 10)
     arcade.draw_line(x + 200, y + 25, x + 200, y - 100, arcade.csscolor.BLANCHED_ALMOND, 10)
 
+
 def main():
     arcade.open_window(SCREEN_WIDTH, SCREEN_HEIGHT, "Lab 3 - Fitzpatrick")
     arcade.set_background_color(arcade.color.PALE_TURQUOISE)
