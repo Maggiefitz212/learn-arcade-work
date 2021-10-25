@@ -70,7 +70,7 @@ class MyGame(arcade.Window):
         # Call the parent class initializer
         super().__init__(SCREEN_WIDTH, SCREEN_HEIGHT, "Lab 7 - User Control")
 
-        # Create the ball
+        # Create the hot air balloon
         self.hot_air_balloon = HotAirBalloon(50, 50, 15, arcade.color.BLACK)
 
         # Make the mouse disappear when cursor is in the window

@@ -51,28 +51,22 @@ class MyGame(arcade.Window):
        self.player_list.append(self.player_sprite)
 
        for i in range(COIN_COUNT):
-            # Create the coin instance
-            # Coin image from kenney.nl
-            coin = arcade.Sprite("coin_01.png", SPRITE_SCALING_COIN)
+        coin = arcade.Sprite("coin_01.png", SPRITE_SCALING_COIN)
 
-            # Position the coin
-            coin.center_x = random.randrange(SCREEN_WIDTH)
-            coin.center_y = random.randrange(SCREEN_HEIGHT)
-
-            # Add the coin to the lists
-            self.coin_list.append(coin)
+        self.coin_list.append(coin)
 
     def on_draw(self):
         arcade.start_render()
+
+        # Draw the sprite lists here. Typically sprites are divided into
+        # different groups. Other game engines might call these "sprite layers"
+        # or "sprite groups." Sprites that don't move should be drawn in their
+        # own group for the best performance, as Arcade can tell the graphics
+        # card to just redraw them at the same spot.
+        # Try to avoid drawing sprites on their own, use a SpriteList
+        # because there are many performance improvements in that code.
         self.coin_list.draw()
         self.player_list.draw()
-
-        output = "Score: " + str(self.score)
-        arcade.draw_text(output, 10, 20, arcade.color.WHITE, 28)
-
-    def on_mouse_motion(self, x, y, dx, dy):
-        self.player_sprite.center_x = x
-        self.player_sprite.center_y = y
 
 def main():
     """ Main method """
