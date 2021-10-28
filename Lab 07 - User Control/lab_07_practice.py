@@ -47,6 +47,11 @@ class MyGame(arcade.Window):
         # Call the parent class's init function
         super().__init__(SCREEN_WIDTH, SCREEN_HEIGHT, "Lab 7 - User Control")
 
+        # Load the ouch and nature sounds when the application starts
+        self.nature_sound = arcade.load_sound("Outdoor_Ambiance.mp3")
+        self.ouch_sound = arcade.load_sound("ouch1 (1).mp3")
+        self.ouch_sound_player = None
+
         # Make the mouse disappear when it is over the window
         self.set_mouse_visible(False)
 
@@ -67,7 +72,7 @@ class MyGame(arcade.Window):
         self.hot_air_balloon.draw()
         self.penguin.draw()
 
-    def update(self, delta_time: float):
+    def update(self, delta_time):
         self.penguin.update()
 
     def on_mouse_motion(self, x, y, dx, dy):
@@ -85,6 +90,8 @@ class MyGame(arcade.Window):
             self.penguin.change_y = MOVEMENT_SPEED
         elif key == arcade.key.DOWN:
             self.penguin.change_y = -MOVEMENT_SPEED
+        elif key == arcade.key.SPACE:
+            arcade.play_sound(self.nature_sound)
 
     def on_key_release(self, key, modifiers):
         """ Called whenever a user releases a key. """
@@ -107,12 +114,12 @@ class HotAirBalloon:
 
     def draw(self):
         """ Draw the balls with the instance variables we have. """
-        arcade.draw_ellipse_filled(self.position_x,
-                                   self.position_y,
-                                   30,
-                                   40,
-                                   self.radius,
-                                   self.color)
+        arcade.draw_line(self.position_x - 10, self.position_y - 17, self.position_x - 10, self.position_y - 37,
+                         arcade.color.BLANCHED_ALMOND, 5)
+        arcade.draw_line(self.position_x + 10, self.position_y - 17, self.position_x + 10, self.position_y - 37,
+                         arcade.color.BLANCHED_ALMOND, 5)
+        arcade.draw_ellipse_filled(self.position_x, self.position_y, 45, 60, self.color, 0, -1)
+        arcade.draw_arc_filled(self.position_x, self.position_y - 37, 40, 80, arcade.color.BROWN, 180, 360)
 
 
 class Penguin:
@@ -144,16 +151,16 @@ class Penguin:
         self.position_y += self.change_y
 
         # See if the ball hit the edge of the screen. If so, change direction
-        if self.position_x < self.radius:
+        if self.position_x < self.radius - 15:
             self.position_x = self.radius
 
-        if self.position_x > SCREEN_WIDTH - self.radius:
+        if self.position_x > SCREEN_WIDTH - self.radius + 10:
             self.position_x = SCREEN_WIDTH - self.radius
 
-        if self.position_y < self.radius:
+        if self.position_y < self.radius - 15:
             self.position_y = self.radius
 
-        if self.position_y > SCREEN_HEIGHT - self.radius:
+        if self.position_y > SCREEN_HEIGHT - self.radius - 10:
             self.position_y = SCREEN_HEIGHT - self.radius
 
 
