@@ -74,6 +74,15 @@ class MyGame(arcade.Window):
 
     def update(self, delta_time):
         self.penguin.update()
+        if self.penguin.position_x <= self.penguin.radius + 8 or self.penguin.position_x >= \
+                SCREEN_WIDTH - (self.penguin.radius + 10):
+            if not self.ouch_sound_player or not self.ouch_sound_player.playing:
+                self.ouch_sound_player = arcade.play_sound(self.ouch_sound)
+
+        if self.penguin.position_y <= self.penguin.radius + 12 or self.penguin.position_y >= \
+                SCREEN_HEIGHT - (self.penguin.radius + 45):
+            if not self.ouch_sound_player or not self.ouch_sound_player.playing:
+                self.ouch_sound_player = arcade.play_sound(self.ouch_sound)
 
     def on_mouse_motion(self, x, y, dx, dy):
         """ Updates the ball's position """
@@ -151,17 +160,17 @@ class Penguin:
         self.position_y += self.change_y
 
         # See if the ball hit the edge of the screen. If so, change direction
-        if self.position_x < self.radius - 15:
-            self.position_x = self.radius
+        if self.position_x < self.radius + 8:
+            self.position_x = self.radius + 8
 
-        if self.position_x > SCREEN_WIDTH - self.radius + 10:
-            self.position_x = SCREEN_WIDTH - self.radius
+        if self.position_x > SCREEN_WIDTH - (self.radius + 10):
+            self.position_x = SCREEN_WIDTH - (self.radius + 10)
 
-        if self.position_y < self.radius - 15:
-            self.position_y = self.radius
+        if self.position_y < self.radius + 12:
+            self.position_y = self.radius + 12
 
-        if self.position_y > SCREEN_HEIGHT - self.radius - 10:
-            self.position_y = SCREEN_HEIGHT - self.radius
+        if self.position_y > SCREEN_HEIGHT - (self.radius + 45):
+            self.position_y = SCREEN_HEIGHT - (self.radius + 45)
 
 
 def main():
