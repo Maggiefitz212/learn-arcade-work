@@ -2,7 +2,7 @@ import random
 import arcade
 
 # --- Constants ---
-SPRITE_SCALING_PLAYER = 0.05
+SPRITE_SCALING_PLAYER = 0.01
 SPRITE_SCALING_TREAT = 0.05
 SPRITE_SCALING_COOKIE = 0.03
 
@@ -37,7 +37,7 @@ class MyGame(arcade.Window):
 
         # Load sound when the game is started
         self.good_sound = arcade.load_sound("Picked Coin Echo 2.wav")
-        self.bad_sound = arcade.load_sound("mixkit-apartment-buzzer-bell-press-932.wav")
+        self.bad_sound = arcade.load_sound("ALERT_Error.wav")
 
     def setup(self):
         """ Set up the game and initialize the variables. """
@@ -52,14 +52,15 @@ class MyGame(arcade.Window):
 
         # Set up the player
         # Character image from kenney.nl
-        self.player_sprite = arcade.Sprite("toppng.com-cute-dog-clipart-clipart-panda-free"
-                                           "-clipart-images-dog-clipart-cute-4766x5173.png", SPRITE_SCALING_PLAYER)
+        self.player_sprite = arcade.Sprite("Daco_3805650.png",
+                                           SPRITE_SCALING_PLAYER)
         self.player_sprite.center_x = 50
         self.player_sprite.center_y = 50
         self.player_list.append(self.player_sprite)
 
         # Create the coins
         for i in range(TREAT_COUNT):
+
             # Create the treat instance
             # Treat image from kenney.nl
             treat = Treat("kisspng-labrador-retriever-puppy-bone-drawing-clip-art-free-dog-bone-clipart-"
@@ -68,14 +69,17 @@ class MyGame(arcade.Window):
             # Position the coin
             treat.center_x = random.randrange(SCREEN_WIDTH)
             treat.center_y = random.randrange(SCREEN_HEIGHT)
+            treat.change_x = random.randrange(-3, 4)
+            treat.change_y = random.randrange(-3, 4)
 
             # Add the coin to the lists
             self.treat_list.append(treat)
 
         # Create the cookies
         for i in range(COOKIE_COUNT):
-            # Create the cookie instance
-            # Cookie image from kenney.nl
+
+            # Create the treat instance
+            # Treat image from kenney.nl
             cookie = Cookie("NicePng_cookie-png_34513.png", SPRITE_SCALING_COOKIE)
 
             # Position the coin
@@ -102,18 +106,21 @@ class MyGame(arcade.Window):
         output = f"Score: {self.score}"
         arcade.draw_text(output, 10, 20, arcade.color.WHITE, 14)
         if len(self.treat_list) == 0:
-            screen_text = f"Game Over!"
-            arcade.draw_text(screen_text, 320, 220, arcade.color.WHITE, 36)
+            game_over_text = f"Game Over!"
+            arcade.draw_text(game_over_text, 275, 300, arcade.color.WHITE, 36)
 
     def on_mouse_motion(self, x, y, dx, dy):
         """ Handle Mouse Motion """
+
+        # Move the center of the player sprite to match the mouse x, y
         if len(self.treat_list) > 0:
-            # Move the center of the player sprite to match the mouse x, y
             self.player_sprite.center_x = x
             self.player_sprite.center_y = y
 
     def update(self, delta_time):
         """ Movement and game logic """
+
+        # Call update on all sprites if there are good sprites left
         if len(self.treat_list) > 0:
             self.treat_list.update()
             self.cookie_list.update()
@@ -139,8 +146,8 @@ class MyGame(arcade.Window):
 
 class Treat(arcade.Sprite):
     """ This class represents the treats on the screen. It is a child class of the arcade library's sprite class."""
-
     def reset_pos(self):
+
         # Resets treat to random spot above the top of the screen
         self.center_y = random.randrange(SCREEN_HEIGHT + 20,
                                          SCREEN_HEIGHT + 100)
@@ -166,7 +173,7 @@ class Cookie(arcade.Sprite):
         self.change_y = 0
 
     def update(self):
-        # Move the cookies
+        # Move the coin
         self.center_x += self.change_x
         self.center_y += self.change_y
 
