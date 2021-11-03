@@ -98,9 +98,12 @@ class MyGame(arcade.Window):
         self.player_list.draw()
         self.cookie_list.draw()
 
-        # Put the text on the screen.
+        # Put the score and game over on the screen.
         output = f"Score: {self.score}"
         arcade.draw_text(output, 10, 20, arcade.color.WHITE, 14)
+        if len(self.treat_list) == 0:
+            screen_text = f"Game Over!"
+            arcade.draw_text(screen_text, 320, 220, arcade.color.WHITE, 36)
 
     def on_mouse_motion(self, x, y, dx, dy):
         """ Handle Mouse Motion """
@@ -114,9 +117,6 @@ class MyGame(arcade.Window):
         if len(self.treat_list) > 0:
             self.treat_list.update()
             self.cookie_list.update()
-        else:
-            screen_text = f"Game Over!"
-            arcade.draw_text(screen_text, 350, 250, arcade.color.WHITE, 36)
 
         # Generate a list of all sprites that collided with the player.
         treats_hit_list = arcade.check_for_collision_with_list(self.player_sprite,
