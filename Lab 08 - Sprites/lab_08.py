@@ -1,4 +1,3 @@
-
 import random
 import arcade
 
@@ -86,6 +85,12 @@ class MyGame(arcade.Window):
             # Position the coin
             cookie.center_x = random.randrange(SCREEN_WIDTH)
             cookie.center_y = random.randrange(SCREEN_HEIGHT)
+            cookie.change_x = random.randrange(-3, 4)
+            if cookie.change_x == 0:
+                cookie.change_x += 1
+            cookie.change_y = random.randrange(-3, 4)
+            if cookie.change_y == 0:
+                cookie.change_y += 1
 
             # Add the coin to the lists
             self.cookie_list.append(cookie)
@@ -97,24 +102,28 @@ class MyGame(arcade.Window):
         self.player_list.draw()
         self.cookie_list.draw()
 
-        # Put the text on the screen.
+        # Put the score and game over on the screen.
         output = f"Score: {self.score}"
         arcade.draw_text(output, 10, 20, arcade.color.WHITE, 14)
+        if len(self.treat_list) == 0:
+            game_over_text = f"Game Over!"
+            arcade.draw_text(game_over_text, 275, 300, arcade.color.WHITE, 36)
 
     def on_mouse_motion(self, x, y, dx, dy):
         """ Handle Mouse Motion """
 
         # Move the center of the player sprite to match the mouse x, y
-        self.player_sprite.center_x = x
-        self.player_sprite.center_y = y
+        if len(self.treat_list) > 0:
+            self.player_sprite.center_x = x
+            self.player_sprite.center_y = y
 
     def update(self, delta_time):
         """ Movement and game logic """
 
-        # Call update on all sprites (The sprites don't do much in this
-        # example though.)
-        self.treat_list.update()
-        self.cookie_list.update()
+        # Call update on all sprites if there are good sprites left
+        if len(self.treat_list) > 0:
+            self.treat_list.update()
+            self.cookie_list.update()
 
         # Generate a list of all sprites that collided with the player.
         treats_hit_list = arcade.check_for_collision_with_list(self.player_sprite,
@@ -173,13 +182,13 @@ class Cookie(arcade.Sprite):
             self.change_x *= -1
 
         if self.right > SCREEN_WIDTH:
-            self.change_y *= -1
+            self.change_x *= -1
 
         if self.bottom < 0:
-            self.center_y *= -1
+            self.change_y *= -1
 
         if self.top > SCREEN_HEIGHT:
-            self.center_y *= -1
+            self.change_y *= -1
 
 
 def main():
