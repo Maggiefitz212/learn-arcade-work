@@ -65,46 +65,52 @@ class MyGame(arcade.Window):
         self.player_sprite.center_y = 512
         self.player_list.append(self.player_sprite)
 
-        for x in range(0, 1000, 64):
+        for x in range(0, 1024, 64):
             wall = arcade.Sprite("wallHalf_top.png", SPRITE_SCALING)
             wall.center_x = x
-            wall.center_y = 1000
+            wall.center_y = 1024
             self.wall_list.append(wall)
 
-        for y in range(0, 1000, 64):
+        for y in range(0, 1024, 64):
             wall = arcade.Sprite("wallHalf_right.png", SPRITE_SCALING)
-            wall.center_x = 985
+            wall.center_x = 960
             wall.center_y = y
             self.wall_list.append(wall)
 
-        for x in range(0, 1000, 64):
+        for x in range(0, 1024, 64):
             wall = arcade.Sprite("wallHalf_bottom.png", SPRITE_SCALING)
             wall.center_x = x
             wall.center_y = 0
             self.wall_list.append(wall)
 
-        for y in range(0, 1000, 64):
+        for y in range(0, 1024, 64):
             wall = arcade.Sprite("wallHalf_left.png", SPRITE_SCALING)
             wall.center_x = 0
             wall.center_y = y
             self.wall_list.append(wall)
 
-        for x in range(128, 936, 64):
+        for x in range(256, 512, 64):
             wall = arcade.Sprite("towerSquare.png", SPRITE_SCALING)
             wall.center_x = x
-            wall.center_y = random.randrange(128, 936, 64)
+            wall.center_y = 256
             self.wall_list.append(wall)
 
-        for y in range(128, 936, 64):
+        for y in range(256, 896, 64):
             wall = arcade.Sprite("towerSquare.png", SPRITE_SCALING)
-            wall.center_x = random.randrange(128, 936, 64)
+            wall.center_x = 448
             wall.center_y = y
             self.wall_list.append(wall)
 
-        for x in range(500, 936, 64):
+        for y in range(320, 896,64):
+            wall = arcade.Sprite("towerSquare.png", SPRITE_SCALING)
+            wall.center_x = 556
+            wall.center_y = y
+            self.wall_list.append(wall)
+
+        for x in range(512, 936, 64):
             wall = arcade.Sprite("towerSquare.png", SPRITE_SCALING)
             wall.center_x = x
-            wall.center_y = 500
+            wall.center_y = 384
             wall_collision_list = arcade.check_for_collision_with_list(wall, self.wall_list)
             if not wall_collision_list:
                 self.wall_list.append(wall)
