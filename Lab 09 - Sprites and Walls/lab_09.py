@@ -7,7 +7,6 @@ If Python and Arcade are installed, this example can be run from the command lin
 python -m arcade.examples.sprite_move_scrolling
 """
 
-import random
 import arcade
 
 SPRITE_SCALING = 1
@@ -97,23 +96,27 @@ class MyGame(arcade.Window):
 
         for y in range(256, 896, 64):
             wall = arcade.Sprite("towerSquare.png", SPRITE_SCALING)
-            wall.center_x = 448
+            wall.center_x = 510
             wall.center_y = y
             self.wall_list.append(wall)
 
-        for y in range(320, 896,64):
-            wall = arcade.Sprite("towerSquare.png", SPRITE_SCALING)
-            wall.center_x = 556
-            wall.center_y = y
-            self.wall_list.append(wall)
-
-        for x in range(512, 936, 64):
+        for x in range(510, 936, 64):
             wall = arcade.Sprite("towerSquare.png", SPRITE_SCALING)
             wall.center_x = x
             wall.center_y = 384
-            wall_collision_list = arcade.check_for_collision_with_list(wall, self.wall_list)
-            if not wall_collision_list:
-                self.wall_list.append(wall)
+            self.wall_list.append(wall)
+
+        for x in range(620, 832, 64):
+            wall = arcade.Sprite("towerSquare.png", SPRITE_SCALING)
+            wall.center_x = x
+            wall.center_y = 210
+            self.wall_list.append(wall)
+
+        for y in range(264, 330, 64):
+            wall = arcade.Sprite("towerSquare.png", SPRITE_SCALING)
+            wall.center_x = 800
+            wall.center_y = y
+            self.wall_list.append(wall)
 
         self.physics_engine = arcade.PhysicsEngineSimple(self.player_sprite, self.wall_list)
 
