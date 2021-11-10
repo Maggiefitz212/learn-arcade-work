@@ -114,8 +114,20 @@ class MyGame(arcade.Window):
 
         for y in range(264, 330, 64):
             wall = arcade.Sprite("towerSquare.png", SPRITE_SCALING)
-            wall.center_x = 800
+            wall.center_x = 812
             wall.center_y = y
+            self.wall_list.append(wall)
+
+        for y in range(146, 210, 64):
+            wall = arcade.Sprite("towerSquare.png", SPRITE_SCALING)
+            wall.center_x = 620
+            wall.center_y = y
+            self.wall_list.append(wall)
+
+        for x in range(780, 896, 64):
+            wall = arcade.Sprite("towerSquare.png", SPRITE_SCALING)
+            wall.center_x = x
+            wall.center_y = 812
             self.wall_list.append(wall)
 
         self.physics_engine = arcade.PhysicsEngineSimple(self.player_sprite, self.wall_list)

@@ -1,23 +1,54 @@
+import arcade
+
+WIDTH = 60
+HEIGHT = 60
+MARGIN = 8
+ROW_COUNT = 10
+COLUMN_COUNT = 10
+SCREEN_WIDTH = (WIDTH + MARGIN) * COLUMN_COUNT + MARGIN
+SCREEN_HEIGHT = (HEIGHT + MARGIN) * ROW_COUNT + MARGIN
+
+
+class MyGame(arcade.Window):
+    """
+    Main application class.
+    """
+
+    def __init__(self, width, height):
+        super().__init__(width, height)
+
+        arcade.set_background_color(arcade.color.BLUEBERRY)
+
+        self.grid = []
+        for row in range(ROW_COUNT):
+            self.grid.append([])
+            for column in range(COLUMN_COUNT):
+                self.grid[row].append(0)
+
+    def on_draw(self):
+        """
+        Render the screen.
+        """
+
+        arcade.start_render()
+        for row in range(ROW_COUNT):
+            for column in range(COLUMN_COUNT):
+                x = WIDTH / 2 + column * (WIDTH + MARGIN) + MARGIN
+                y = HEIGHT / 2 + row * (WIDTH + MARGIN) + MARGIN
+                arcade.draw_rectangle_filled(x, y, WIDTH, HEIGHT, arcade.color.GRANNY_SMITH_APPLE)
+
+    def on_mouse_press(self, x, y, button, key_modifiers):
+        """
+        Called when the user presses a mouse button.
+        """
+        pass
+
+
 def main():
-    my_file = open("super_villains.txt")
-    villain_list = []
-    for line in my_file:
-        line = line.strip()
-        villain_list.append(line)
 
-    my_file.close()
-
-    print(villain_list)
-    print("There were ", len(villain_list), "names in the file.")
-
-    # Linear search
-    key = "Octavia the Siren"
-    current_position = 0
-    while current_position != len(villain_list) and villain_list[current_position] != key:
-        current_position += 1
-
-    if current_position == len(villain_list):
-        print("Item not found.")
+    window = MyGame(SCREEN_WIDTH, SCREEN_HEIGHT)
+    arcade.run()
 
 
-main()
+if __name__ == "__main__":
+    main()
