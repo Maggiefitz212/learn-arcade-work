@@ -11,8 +11,8 @@ ROW_COUNT = 10
 COLUMN_COUNT = 10
 
 # This sets the WIDTH and HEIGHT of each grid location
-WIDTH = 20
-HEIGHT = 20
+WIDTH = 50
+HEIGHT = 50
 
 # This sets the margin between each cell
 # and on the edges of the screen.
@@ -42,6 +42,10 @@ class MyGame(arcade.Window):
             self.grid.append([])
             for column in range(COLUMN_COUNT):
                 self.grid[row].append(0)  # Append a cell
+
+        self.total_ones = 0
+        self.ones_in_row = 0
+        self.columns_in_row = 0
 
         arcade.set_background_color(arcade.color.BLUEBERRY)
 
@@ -88,6 +92,20 @@ class MyGame(arcade.Window):
                 self.grid[row][column] = 1
             else:
                 self.grid[row][column] = 0
+
+        self.total_ones = 0
+        for row in range(ROW_COUNT):
+            for column in range(COLUMN_COUNT):
+                if self.grid[row][column] == 1:
+                    self.total_ones += 1
+        print("Total of", self.total_ones, "cells are selected.")
+
+        self.ones_in_row = 0
+        for column in range(COLUMN_COUNT):
+            for row in range(ROW_COUNT):
+                if self.grid[row][column] == 1:
+                    self.ones_in_row += 1
+                print("Row", row, "has", self.ones_in_row, "selected.")
 
 
 def main():
