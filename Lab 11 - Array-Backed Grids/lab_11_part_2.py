@@ -45,7 +45,8 @@ class MyGame(arcade.Window):
 
         self.total_ones = 0
         self.ones_in_row = 0
-        self.columns_in_row = 0
+        self.ones_in_column = 0
+        self.continuous_count = 0
 
         arcade.set_background_color(arcade.color.BLUEBERRY)
 
@@ -101,15 +102,34 @@ class MyGame(arcade.Window):
         print("Total of", self.total_ones, "cells are selected.")
 
         self.ones_in_row = 0
+        for row in range(ROW_COUNT):
+            for column in range(COLUMN_COUNT):
+                if self.grid[row][column] == 1:
+                    self.ones_in_row += 1
+            print("Row", row, "has", self.ones_in_row, "selected.")
+            self.ones_in_row = 0
+
+        self.ones_in_column = 0
         for column in range(COLUMN_COUNT):
             for row in range(ROW_COUNT):
                 if self.grid[row][column] == 1:
-                    self.ones_in_row += 1
-                print("Row", row, "has", self.ones_in_row, "selected.")
+                    self.ones_in_column += 1
+            print("Column", column, "has", self.ones_in_column, "selected.")
+            self.ones_in_column = 0
+
+        for row in range(ROW_COUNT):
+            for column in range(COLUMN_COUNT):
+                if self.grid[row][column] == 1:
+                    self.continuous_count += 1
+                else:
+                    if self.continuous_count > 2:
+                        print("There are", self.continuous_count, "continuous blocks on row", str(row) + ".")
+                    self.continuous_count = 0
+        if self.continuous_count > 2:
+            print("There are", self.continuous_count, "continuous blocks on row", str(row) + ".")
 
 
 def main():
-
     window = MyGame(SCREEN_WIDTH, SCREEN_HEIGHT)
     arcade.run()
 
