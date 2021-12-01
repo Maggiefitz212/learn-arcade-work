@@ -105,7 +105,7 @@ class MyGame(arcade.Window):
             for row in range(ROW_COUNT):
                 if self.grid[row][column] == 1:
                     self.ones_in_row += 1
-                print("Row", row, "has", self.ones_in_row, "selected.")
+            print("Row", row, "has", self.ones_in_row, "selected.")
 
 
 def main():
