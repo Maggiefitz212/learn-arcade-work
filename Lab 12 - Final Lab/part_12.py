@@ -5,10 +5,9 @@ SCREEN_WIDTH = 800
 SCREEN_HEIGHT = 600
 
 # --- Constants ---
-SPRITE_SCALING_PLAYER = 0.01
+SPRITE_SCALING_PLAYER = 0.1
 SPRITE_SCALING_DOG = 0.05
-SPRITE_SCALING_HIDING_SPOT = 0.05
-HIDING_SPOT_COUNT = 5
+SPRITE_SCALING_HIDING_SPOT = .25
 
 
 class MyGame(arcade.Window):
@@ -57,6 +56,7 @@ class MyGame(arcade.Window):
 
         # Set up the score.
         self.score = 0
+        self.lives = 3
 
         # Set up the player, dog, and hiding spot.
         # Dog sprite from kenney.nl
@@ -64,20 +64,49 @@ class MyGame(arcade.Window):
         # Player sprite from opengameart.org
         self.player_sprite = arcade.Sprite("Idle (1).png", SPRITE_SCALING_PLAYER)
         self.player_sprite.center_x = 50
-        self.player_sprite.center_y = 50
+        self.player_sprite.center_y = 200
         self.player_list.append(self.player_sprite)
         # Create the five different hiding spots
         # All hiding spots from flaticon.com created by Freepik
         self.hiding_spot = arcade.Sprite("playground.png", SPRITE_SCALING_HIDING_SPOT)
+        self.hiding_spot.center_x = 150
+        self.hiding_spot.center_y = 250
         self.hiding_spot_list.append(self.hiding_spot)
         self.hiding_spot = arcade.Sprite("fountain.png", SPRITE_SCALING_HIDING_SPOT)
+        self.hiding_spot.center_x = 300
+        self.hiding_spot.center_y = 350
         self.hiding_spot_list.append(self.hiding_spot)
         self.hiding_spot = arcade.Sprite("slide.png", SPRITE_SCALING_HIDING_SPOT)
+        self.hiding_spot.center_x = 450
+        self.hiding_spot.center_y = 450
         self.hiding_spot_list.append(self.hiding_spot)
         self.hiding_spot = arcade.Sprite("seesaw.png", SPRITE_SCALING_HIDING_SPOT)
+        self.hiding_spot.center_x = 600
+        self.hiding_spot.center_y = 350
         self.hiding_spot_list.append(self.hiding_spot)
         self.hiding_spot = arcade.Sprite("bridge.png", SPRITE_SCALING_HIDING_SPOT)
+        self.hiding_spot.center_x = 700
+        self.hiding_spot.center_y = 250
         self.hiding_spot_list.append(self.hiding_spot)
+
+    def on_draw(self):
+        """ Draw everything """
+        arcade.start_render()
+        self.dog_list.draw()
+        self.player_list.draw()
+        self.hiding_spot_list.draw()
+
+        # Show the lives on the screen
+        lives_output = f"Lives Left: {self.lives}"
+        score_output = f"Score: {self.score}"
+        arcade.draw_text(lives_output, 10, 60, arcade.color.WHITE, 28)
+        arcade.draw_text(score_output, 10, 20, arcade.color.WHITE, 28)
+
+    def on_mouse_motion(self, x, y, dx, dy):
+        """ Handle mouse motion """
+        if self.lives > 0:
+            self.player_sprite.center_x = x
+            self.player_sprite.center_y = y
 
 
 def main():
