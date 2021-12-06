@@ -1,6 +1,7 @@
 import arcade
+import random
 
-# Create and set the constants
+# Create and set the constants for screen width and height
 SCREEN_WIDTH = 800
 SCREEN_HEIGHT = 600
 
@@ -8,6 +9,9 @@ SCREEN_HEIGHT = 600
 SPRITE_SCALING_PLAYER = 0.1
 SPRITE_SCALING_DOG = 0.05
 SPRITE_SCALING_HIDING_SPOT = .25
+
+MOVEMENT_SPEED = 5
+CAMERA_SPEED = 1
 
 
 class MyGame(arcade.Window):
@@ -27,6 +31,8 @@ class MyGame(arcade.Window):
         self.hiding_spot = None
         self.lives = None
         self.score = 0
+        self.hiding_spot_clicked = None
+        self.dog_placement = None
 
         # Set up the physics engine.
         self.physics_engine = None
@@ -61,11 +67,13 @@ class MyGame(arcade.Window):
         # Set up the player, dog, and hiding spot.
         # Dog sprite from kenney.nl
         self.dog_sprite = arcade.Sprite("Daco_3805650.png", SPRITE_SCALING_DOG)
+
         # Player sprite from opengameart.org
         self.player_sprite = arcade.Sprite("Idle (1).png", SPRITE_SCALING_PLAYER)
         self.player_sprite.center_x = 50
         self.player_sprite.center_y = 200
         self.player_list.append(self.player_sprite)
+
         # Create the five different hiding spots
         # All hiding spots from flaticon.com created by Freepik
         self.hiding_spot = arcade.Sprite("playground.png", SPRITE_SCALING_HIDING_SPOT)
@@ -89,9 +97,40 @@ class MyGame(arcade.Window):
         self.hiding_spot.center_y = 250
         self.hiding_spot_list.append(self.hiding_spot)
 
+        # Roll a random number that will decide where to place the dog
+        dog_placement_number = random.randrange(5)
+        if dog_placement_number == 0:
+            self.dog_sprite.center_x = 150
+            self.dog_sprite.center_y = 250
+            self.dog_placement = "Playground"
+        elif dog_placement_number == 1:
+            self.dog_sprite.center_x = 300
+            self.dog_sprite.center_y = 350
+            self.dog_placement = "Fountain"
+        elif dog_placement_number == 2:
+            self.dog_sprite.center_x = 450
+            self.dog_sprite.center_y = 450
+            self.dog_placement = "Slide"
+        elif dog_placement_number == 3:
+            self.dog_sprite.center_x = 600
+            self.dog_sprite.center_y = 350
+            self.dog_placement = "Seesaw"
+        else:
+            self.dog_sprite.center_x = 700
+            self.dog_sprite.center_y = 250
+            self.dog_placement = "Bridge"
+
+        # Create the physics engine
+        self.physics_engine = arcade.PhysicsEngineSimple(self.player_sprite, self.hiding_spot_list)
+
     def on_draw(self):
         """ Draw everything """
         arcade.start_render()
+
+        # Select the unscrolled camera for our GUI
+        self.camera_gui.use()
+
+        # Draw the sprites
         self.dog_list.draw()
         self.player_list.draw()
         self.hiding_spot_list.draw()
@@ -107,6 +146,45 @@ class MyGame(arcade.Window):
         if self.lives > 0:
             self.player_sprite.center_x = x
             self.player_sprite.center_y = y
+
+    def on_mouse_press(self, x, y, button, modifiers):
+        """ Called when the user presses a mouse button. """
+        if button == arcade.MOUSE_BUTTON_LEFT:
+            print("Left mouse button pressed at", x, y)
+            if self.hiding_spot_list[0].left <= x <= self.hiding_spot_list[0].right:
+                if self.hiding_spot_list[0].bottom <= y <= self.hiding_spot_list[0].top:
+                    self.hiding_spot_clicked = "Playground"
+            elif self.hiding_spot_list[1].left <= x <= self.hiding_spot_list[1].right:
+                if self.hiding_spot_list[1].bottom <= y <= self.hiding_spot_list[1].top:
+                    self.hiding_spot_clicked = "Fountain"
+            elif self.hiding_spot_list[2].left <= x <= self.hiding_spot_list[2].right:
+                if self.hiding_spot_list[2].bottom <= y <= self.hiding_spot_list[2].top:
+                    self.hiding_spot_clicked = "Slide"
+            elif self.hiding_spot_list[3].left <= x <= self.hiding_spot_list[3].right:
+                if self.hiding_spot_list[3].bottom <= y <= self.hiding_spot_list[3].top:
+                    self.hiding_spot_clicked = "Seesaw"
+            else:
+                if self.hiding_spot_list[3].bottom <= y <= self.hiding_spot_list[3].top:
+                    self.hiding_spot_clicked = "Bridge"
+
+            if self.hiding_spot_clicked == self.dog_placement:
+                self.score += 10
+            else:
+                self.lives -= 1
+        elif button == arcade.MOUSE_BUTTON_RIGHT:
+            print("Right mouse button pressed at", x, y)
+
+    def update(self, delta_time):
+        """ Movement and game logic """
+
+        # Call update on physics engine and hiding spots list
+        self.physics_engine.update()
+        self.hiding_spot_list.update()
+
+        # Scroll the window to the player
+        lower_left_corner = (self.player_sprite.center_x - self.width / 2,
+                             self.player_sprite.center_y - self.height / 2)
+        self.camera_sprites.move_to(lower_left_corner, CAMERA_SPEED)
 
 
 def main():
