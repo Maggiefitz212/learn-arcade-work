@@ -1,0 +1,50 @@
+Maggie Fitzpatrick
+12/3/2021
+Quantitative Reasoning Assignment
+
+1.  I added functionality by using lists because they can hold multiple variable
+under one name. I can access an individual element using square brackets or
+iterate through a list using a loop. This is much easier than creating twenty
+different variables and keeping track of what each one is. I created a list in
+the text adventure game to hold the rooms. This helped me keep track of which
+room I was currently in and which one I was going to next.
+    I determined when to use an if-statement by asking myself if I had multiple
+paths I could take if a certain comparison evaluated to true or not. In the camel lab,
+I checked if the user's input was equal to a certain option and completed certain
+tasks based on that input. This helped me break the project into smaller parts
+and also use selection to only execute necessary code.
+    I incorporated functions to increase the readability of my program and reduce
+repeated code. In lab 3, we took our program from lab 2 and made each drawing into
+functions. Instead of writing the same code twice with different x and y coordinates,
+I just called the function with the x and y coordinates as parameters. I could even
+copy and paste this code into future programs if I wanted to redraw these objects.
+It is also more apparent to another person reading my code what draw_sunset does
+versus a bunch of draw arc commands.
+    During the loopy lab, I looped through 29 rows and columns to draw a rectangle
+with specific features and shapes. I could have copied each section of code below
+the for loops 58 times, but it is way easier to have the computer automatically
+repeat it using the loop. Looping makes the program run quicker and is easier to
+read than the alternative. I knew I needed to use a loop if I wanted to repeat
+a piece of code multiple times. I chose to use a for loop if I knew how many times
+I wanted to repeat the code and a while loop if I did not.
+    The final method I used to add functionality to my program was classes. A class
+is a structure that groups information in a certain category together and can create
+multiple instances of that data. I knew I needed to use this when I was creating
+more than one version of something using different data like in lab 12.
+2. Comments
+   Variable names
+   Function names
+   Formatting
+   Conciseness
+
+3. Run the code
+   Reference sample code
+   Read errors
+   Use print statements
+   Use debuggers
+
+4. People are more than their test scores
+   Computers don't have empathy
+   Algorithms can spread misinformation
+   Hard to control if they get out of hand
+   Algorithms have bias of programmers and can further divide people
