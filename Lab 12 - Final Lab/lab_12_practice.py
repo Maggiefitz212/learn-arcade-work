@@ -146,33 +146,74 @@ class MyGame(arcade.Window):
 
     def on_mouse_press(self, x, y, button, modifiers):
         """ Called when the user presses a mouse button. """
-        if button == arcade.MOUSE_BUTTON_LEFT:
-            print("Left mouse button pressed at", x, y)
-            if self.hiding_spot_list[0].left <= x <= self.hiding_spot_list[0].right:
-                if self.hiding_spot_list[0].bottom <= y <= self.hiding_spot_list[0].top:
-                    self.hiding_spot_clicked = "Playground"
-            elif self.hiding_spot_list[1].left <= x <= self.hiding_spot_list[1].right:
-                if self.hiding_spot_list[1].bottom <= y <= self.hiding_spot_list[1].top:
-                    self.hiding_spot_clicked = "Fountain"
-            elif self.hiding_spot_list[2].left <= x <= self.hiding_spot_list[2].right:
-                if self.hiding_spot_list[2].bottom <= y <= self.hiding_spot_list[2].top:
-                    self.hiding_spot_clicked = "Slide"
-            elif self.hiding_spot_list[3].left <= x <= self.hiding_spot_list[3].right:
-                if self.hiding_spot_list[3].bottom <= y <= self.hiding_spot_list[3].top:
-                    self.hiding_spot_clicked = "Seesaw"
-            else:
-                if self.hiding_spot_list[3].bottom <= y <= self.hiding_spot_list[3].top:
-                    self.hiding_spot_clicked = "Bridge"
+        if not self.button_clicked:
+            if button == arcade.MOUSE_BUTTON_LEFT:
+                self.button_clicked = True
+                print("Left mouse button pressed at", x, y)
+                if self.hiding_spot_list[0].left <= x <= self.hiding_spot_list[0].right:
+                    if self.hiding_spot_list[0].bottom <= y <= self.hiding_spot_list[0].top:
+                        self.hiding_spot_clicked = "Playground"
+                elif self.hiding_spot_list[1].left <= x <= self.hiding_spot_list[1].right:
+                    if self.hiding_spot_list[1].bottom <= y <= self.hiding_spot_list[1].top:
+                        self.hiding_spot_clicked = "Fountain"
+                elif self.hiding_spot_list[2].left <= x <= self.hiding_spot_list[2].right:
+                    if self.hiding_spot_list[2].bottom <= y <= self.hiding_spot_list[2].top:
+                        self.hiding_spot_clicked = "Slide"
+                elif self.hiding_spot_list[3].left <= x <= self.hiding_spot_list[3].right:
+                    if self.hiding_spot_list[3].bottom <= y <= self.hiding_spot_list[3].top:
+                        self.hiding_spot_clicked = "Seesaw"
+                elif self.hiding_spot_list[4].left <= x <= self.hiding_spot_list[4].right:
+                    if self.hiding_spot_list[3].bottom <= y <= self.hiding_spot_list[3].top:
+                        self.hiding_spot_clicked = "Bridge"
+            elif button == arcade.MOUSE_BUTTON_RIGHT:
+                print("Right mouse button pressed at", x, y)
+        elif self.button_clicked:
+            if button == arcade.MOUSE_BUTTON_LEFT:
+                if self.hiding_spot_list[0].left <= x <= self.hiding_spot_list[0].right:
+                    if self.hiding_spot_list[0].bottom <= y <= self.hiding_spot_list[0].top:
+                        self.hiding_spot_clicked = "Playground"
+                elif self.hiding_spot_list[1].left <= x <= self.hiding_spot_list[1].right:
+                    if self.hiding_spot_list[1].bottom <= y <= self.hiding_spot_list[1].top:
+                        self.hiding_spot_clicked = "Fountain"
+                elif self.hiding_spot_list[2].left <= x <= self.hiding_spot_list[2].right:
+                    if self.hiding_spot_list[2].bottom <= y <= self.hiding_spot_list[2].top:
+                        self.hiding_spot_clicked = "Slide"
+                elif self.hiding_spot_list[3].left <= x <= self.hiding_spot_list[3].right:
+                    if self.hiding_spot_list[3].bottom <= y <= self.hiding_spot_list[3].top:
+                        self.hiding_spot_clicked = "Seesaw"
+                elif self.hiding_spot_list[4].left <= x <= self.hiding_spot_list[4].right:
+                    if self.hiding_spot_list[3].bottom <= y <= self.hiding_spot_list[3].top:
+                        self.hiding_spot_clicked = "Bridge"
 
-            print(self.hiding_spot_clicked)
+                new_dog_placement_number = random.randrange(5)
+                if new_dog_placement_number == 0:
+                    self.dog_sprite.center_x = 150
+                    self.dog_sprite.center_y = 250
+                    self.dog_placement = "Playground"
+                elif new_dog_placement_number == 1:
+                    self.dog_sprite.center_x = 300
+                    self.dog_sprite.center_y = 350
+                    self.dog_placement = "Fountain"
+                elif new_dog_placement_number == 2:
+                    self.dog_sprite.center_x = 450
+                    self.dog_sprite.center_y = 450
+                    self.dog_placement = "Slide"
+                elif new_dog_placement_number == 3:
+                    self.dog_sprite.center_x = 600
+                    self.dog_sprite.center_y = 350
+                    self.dog_placement = "Seesaw"
+                else:
+                    self.dog_sprite.center_x = 700
+                    self.dog_sprite.center_y = 250
+                    self.dog_placement = "Bridge"
 
-            if self.hiding_spot_clicked == self.dog_placement:
-                self.score += 10
-            else:
-                self.lives -= 1
+                if self.hiding_spot_clicked == self.dog_placement:
+                    self.score += 10
+                else:
+                    self.lives -= 1
 
-        elif button == arcade.MOUSE_BUTTON_RIGHT:
-            print("Right mouse button pressed at", x, y)
+            elif button == arcade.MOUSE_BUTTON_RIGHT:
+                print("Right mouse button pressed at", x, y)
 
 
 def main():
