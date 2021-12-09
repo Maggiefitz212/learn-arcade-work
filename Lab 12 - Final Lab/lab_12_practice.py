@@ -170,37 +170,9 @@ class MyGame(arcade.Window):
                 self.score += 10
             else:
                 self.lives -= 1
+
         elif button == arcade.MOUSE_BUTTON_RIGHT:
             print("Right mouse button pressed at", x, y)
-
-    def update(self, delta_time):
-        """ Movement and game logic """
-        new_dog_placement_number = random.randrange(5)
-        if new_dog_placement_number == 0:
-            self.dog_sprite.center_x = 150
-            self.dog_sprite.center_y = 250
-            self.dog_placement = "Playground"
-        elif new_dog_placement_number == 1:
-            self.dog_sprite.center_x = 300
-            self.dog_sprite.center_y = 350
-            self.dog_placement = "Fountain"
-        elif new_dog_placement_number == 2:
-            self.dog_sprite.center_x = 450
-            self.dog_sprite.center_y = 450
-            self.dog_placement = "Slide"
-        elif new_dog_placement_number == 3:
-            self.dog_sprite.center_x = 600
-            self.dog_sprite.center_y = 350
-            self.dog_placement = "Seesaw"
-        else:
-            self.dog_sprite.center_x = 700
-            self.dog_sprite.center_y = 250
-            self.dog_placement = "Bridge"
-
-        if self.hiding_spot_clicked == self.dog_placement:
-            self.score += 10
-        else:
-            self.lives -= 1
 
 
 def main():

@@ -2,13 +2,13 @@ Maggie Fitzpatrick
 12/3/2021
 Quantitative Reasoning Assignment
 
-1.  I added functionality by using lists because they can hold multiple variable
+1. I added functionality by using lists because they can hold multiple variable
 under one name. I can access an individual element using square brackets or
 iterate through a list using a loop. This is much easier than creating twenty
 different variables and keeping track of what each one is. I created a list in
 the text adventure game to hold the rooms. This helped me keep track of which
 room I was currently in and which one I was going to next.
-    I determined when to use an if-statement by asking myself if I had multiple
+   I determined when to use an if-statement by asking myself if I had multiple
 paths I could take if a certain comparison evaluated to true or not. In the camel lab,
 I checked if the user's input was equal to a certain option and completed certain
 tasks based on that input. This helped me break the project into smaller parts
@@ -30,21 +30,89 @@ I wanted to repeat the code and a while loop if I did not.
     The final method I used to add functionality to my program was classes. A class
 is a structure that groups information in a certain category together and can create
 multiple instances of that data. I knew I needed to use this when I was creating
-more than one version of something using different data like in lab 12.
-2. Comments
-   Variable names
-   Function names
-   Formatting
-   Conciseness
+more than one version of something using different data like in lab 6. I created
+multiple rooms under the same class name but different instances of the same class.
+This is much simpler code than making a bunch of different variables and keeping
+track of all of them.
 
-3. Run the code
-   Reference sample code
-   Read errors
-   Use print statements
-   Use debuggers
+2.  There are many tools a programmer can use to communicate what their code means.
+One of these tools is comments, or notes above sections of code that explain what
+is happening or what the purpose of an element is. In my final lab, I wrote what
+each function, variable, and class did, so I could understand it better when I
+looked at it later. These comments would also help other programmers if they needed
+to understand my code as well.
+    Another communication method is variable names, or the title given to a value
+to explain what it is. In lab 10, I used a variable called line to represent each
+line in the dictionary. If I had called this l, I would not have known what the
+variable represented when I opened the program again. Also, other programmers could
+not tell what l means when they look at the code either. By using a descriptive
+name, I make my code easier to read.
+     Similarly, function names should be descriptive, so other programmers can
+decipher what it does when they read it. In lab 3, I used function names like draw_sunset
+and draw_fence to show what the function does. Another programmer could look at
+my code and recognize that these functions draws a sunset and a fence.
+     Proper formatting such as indentations and blank lines to separate blocks of code
+made my code more readable. The indentations create a visual line between similar
+lines of code. For example, an if-statement with proper formatting lines up the
+comparisons and indents code to execute if the comparison is true. The blank lines
+group similar code together and make it clear to the viewer when they are transitioning
+from one class, function, or conditional statement to another section of code.
+     When writing code, it is important to be concise. This makes it easier for
+someone reading a program to understand what is happening. In lab 4, I originally
+wrote while done == False for my loop, but I simplified it to while not done. This
+phrasing is clearer for the reader, because it states exactly why the done variable
+would equal False.
+3.   A programmer can identify errors in several ways. They could start by running
+their program to see if it even runs and if there are any parts of the program that
+are visibly not working. During lab 8, I found an error in my cookie sprites, because
+I could see they were not moving. While this method may seem extremely obvious,
+it is still effective.
+     I also compared the online book's sample code to my own in order to figure
+out why it is failing. As Dr. Craven has continually mentioned, computer science
+is mostly just building off of other people's work. If someone else has already done
+what I am trying to do, I can use their perfected code to find the errors in my own.
+     Reading the error message when the program fails is helpful as well. It includes
+the line where the error occurred, so I can narrow down the location of the error.
+The computer prints the type of error that happened, so I can identify what I should
+change and how to change it.
+     Sometimes a program will run, but it is producing the wrong value or running
+incorrectly. In my final lab, my dog_sprite was hiding in a different spot every
+time the user clicked (like I wanted it to), but the variable holding the dog's
+new hiding spot was not updating accordingly. I inserted print statements after
+the changing values to make sure they were updating. This helped me identify the
+error because it printed the wrong value.
+     PyCharm has a built-in debugging program that can catch errors. I can step through
+each line of code to see if it is executing what I want it to. Similar to the error
+messages, this application helps me find where the bug is occurring. The main difference
+is the debugger catches errors that silently fail while the error messages do not.
 
-4. People are more than their test scores
-   Computers don't have empathy
-   Algorithms can spread misinformation
-   Hard to control if they get out of hand
-   Algorithms have bias of programmers and can further divide people
+4.   Quantitative values are important, but they are not the only measure we should
+use to evaluate people. College admissions can not just use test scores to decide
+if someone should get into a school, because an individual is more than just
+their test scores. Someone could have a 36 ACT but lack social skills or common sense.
+Even though they are quantitatively stellar, they may not be a good asset to the
+school because of qualitative factors.
+     We can not rely completely on computer-generated algorithms either. They do not
+have empathy like humans do. If they are in charge of tweeting for a company, they
+might comment racial slurs or promote terrorist organizations like Microsoft's
+Twitter bot from last summer. The computer did not have the capacity to recognize
+those actions hurt people. If we only used quantitative measures to evaluate people,
+we could hurt them.
+     Algorithms can spread misinformation like with the coronavirus. Social media
+platforms were algorithmically designed to share similar content. If someone clicks
+on an article saying masks don't stop COVID-19, they are going to get content related
+to that. If a human were suggesting content rather than a computer, they would be
+able to flag this as damaging and stop sharing it. Algorithms do not have the humanity
+to do this.
+     Computer programs have also increased unemployment, because companies like Walmart
+and Amazon have machines do jobs that were previously done by humans. Instead of hiring
+more checkers at Walmart, they install self-checks because it is cheaper. Machines
+do not need benefits, a wage, or sick days. Corporations prioritize their profit
+margins over supporting other human beings.
+     Since programs learn whatever their programmer allows them to/teaches them,
+they have the same biases as the programmer. When New York public schools installed
+facial recognition technology, the algorithm could not differentiate Black, Asian,
+or Latinx individuals, because the program had not been tested on these groups.
+If a human were identifying students, they could remember specific characteristics
+of people and form bonds with them. A computer can not do this since it doesn't have
+emotions.
