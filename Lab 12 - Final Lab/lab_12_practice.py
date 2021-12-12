@@ -18,18 +18,18 @@ MOVEMENT_SPEED = 5
 def choose_player(x, y):
     dog_sprite_1 = arcade.Sprite("Daco_3805650.png", SPRITE_SCALING_DOG_1)
     dog_sprite_1.center_x = 100
-    dog_sprite_1.center_y = 230
+    dog_sprite_1.center_y = 190
     dog_sprite_2 = arcade.Sprite("Idle (2).png", SPRITE_SCALING_DOG_2)
     dog_sprite_2.center_x = 690
-    dog_sprite_2.center_y = 230
+    dog_sprite_2.center_y = 190
     if dog_sprite_1.left <= x <= dog_sprite_1.right:
         if dog_sprite_1.bottom <= y <= dog_sprite_1.top:
-            user_dog = "Brown Dog"
-            return user_dog
+            dog_choice = "Brown Dog"
+            return dog_choice
     elif dog_sprite_2.left <= x <= dog_sprite_2.right:
         if dog_sprite_2.bottom <= y <= dog_sprite_2.top:
-            user_dog = "Gray Dog"
-            return user_dog
+            dog_choice = "Grey Dog"
+            return dog_choice
     else:
         arcade.draw_text("That is not a possible character. CLick on a dog.", 200, 150,
                          arcade.color.RED, font_size=20, anchor_x="center")
@@ -66,7 +66,7 @@ def hide_dog(dog_sprite, hiding_spot_list):
                 dog_sprite.center_y = 480
             elif dog_placement_number == 7:
                 dog_sprite.center_x = 630
-                dog_sprite.center_x = 470
+                dog_sprite.center_y = 470
 
 
 # Class that shows instruction screen and displays options for dogs
@@ -74,6 +74,8 @@ class InstructionView(arcade.View):
     def on_show(self):
         """ This is run once when we switch to this view """
         arcade.set_background_color(arcade.color.BOTTLE_GREEN)
+
+        self.window.set_mouse_visible(True)
 
         # Reset the viewport, necessary if we have a scrolling game and we need
         # to reset the viewport back to the start so we can see what we draw.
@@ -88,7 +90,7 @@ class InstructionView(arcade.View):
                          arcade.color.WHITE, font_size=20, anchor_x="center")
         arcade.draw_text("Game Instructions: Find dog and click on it.", self.window.width / 2,
                          self.window.height / 2-75, arcade.color.WHITE, font_size=30, anchor_x="center")
-        dog_sprite_1 = arcade.Sprite("Daco_3805650.png", .009)
+        dog_sprite_1 = arcade.Sprite("Daco_3805650.png", SPRITE_SCALING_DOG_1)
         dog_sprite_1.center_x = 100
         dog_sprite_1.center_y = 190
         dog_sprite_1.draw()
@@ -107,11 +109,12 @@ class InstructionView(arcade.View):
         player_sprite.center_y = y
 
     def on_mouse_press(self, x, y, button, modifiers):
-        """ If the user presses the mouse button on a dog, start the game. """
+        """ If the user presses the mouse button on a dog, start the game and choose player. """
         dog_choice = choose_player(x, y)
-        game_view = GameView()
-        game_view.setup(dog_choice)
-        self.window.show_view(game_view)
+        if dog_choice:
+            game_view = GameView()
+            game_view.setup(dog_choice)
+            self.window.show_view(game_view)
 
 
 class GameView(arcade.View):
@@ -144,7 +147,7 @@ class GameView(arcade.View):
         # Set the background color
         arcade.set_background_color(arcade.color.BOTTLE_GREEN)
 
-    def setup(self, user_dog):
+    def setup(self, dog_choice):
         """ Set up the game and initialize variables """
 
         # Sprite lists
@@ -158,16 +161,16 @@ class GameView(arcade.View):
 
         # Set up the player, dog, and hiding spots.
         # Brown dog sprite from kenney.nl
-        # Gray dog sprite from opengameart.org
-        if user_dog == "Brown Dog":
+        # Grey dog sprite from opengameart.org
+        if dog_choice == "Brown Dog":
             self.dog_sprite = arcade.Sprite("Daco_3805650.png", SPRITE_SCALING_DOG_1)
-            self.dog_sprite.center_x = 200
-            self.dog_sprite.center_y = 200
+            self.dog_sprite.center_x = 100
+            self.dog_sprite.center_y = 190
             self.dog_list.append(self.dog_sprite)
-        elif user_dog == "Gray Dog":
+        elif dog_choice == "Grey Dog":
             self.dog_sprite = arcade.Sprite("Idle (2).png", SPRITE_SCALING_DOG_2)
-            self.dog_sprite.center_x = 200
-            self.dog_sprite.center_y = 200
+            self.dog_sprite.center_x = 690
+            self.dog_sprite.center_y = 190
             self.dog_list.append(self.dog_sprite)
 
         # Player sprite from opengameart.org
@@ -250,8 +253,9 @@ class GameView(arcade.View):
                 arcade.play_sound(self.good_sound)
                 self.score += 10
             else:
-                self.lives -= 1
-                arcade.play_sound(self.bad_sound)
+                if self.lives > 0:
+                    self.lives -= 1
+                    arcade.play_sound(self.bad_sound)
 
         elif button == arcade.MOUSE_BUTTON_RIGHT:
             print("Right mouse button pressed at", x, y)
